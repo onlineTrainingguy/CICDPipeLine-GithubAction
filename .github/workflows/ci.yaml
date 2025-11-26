@@ -1,5 +1,7 @@
 name: CI pipeline
-on: push
+on: 
+    schedule:
+      - cron: '* * * * *'  # Runs every minute
 jobs:
     build:
      runs-on: ubuntu-latest
