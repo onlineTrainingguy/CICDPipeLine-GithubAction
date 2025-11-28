@@ -5,7 +5,7 @@ on:
         - main
 jobs:
     hello_world:
-     runs-on: sef-hosted
+     runs-on: MyAgent
      steps:
         - name: Print Hello World
           run: echo "Hello, World!"
