@@ -33,8 +33,19 @@ jobs:
           kubectl get nodes
       - name: Deploy to Kubernetes
         run: |
-          kubectl set image deployment/nginx-deploy nginx=nginx    
-        #kubectl set image deployment/nginx-deploy nginx=${{ secrets.DOCKERHUB_USERNAME }}/myapp:ci    
+          kubectl set image deployment/nginx-deploy nginx=${{ secrets.DOCKERHUB_USERNAME }}/myapp:c  --record
+          echo "Deployment initiated"
+          set +e
+          kubectl rollout status deployment/nginx-deploy --timeout=120s
+          if [ $? -ne 0 ]; then
+            echo "Rollout failed, initiating rollback"
+            kubectl rollout undo deployment/nginx-deploy
+            exit 1
+          else
+            echo "Rollout successful"  
+          fi  
+        #kubectl set image deployment/nginx-deploy nginx=nginx    
+          
 
       #   uses: docker/setup-qemu-action@v3
 
