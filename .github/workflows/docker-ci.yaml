@@ -31,6 +31,9 @@ jobs:
       - name: Verify the Cluster Access
         run: |
           kubectl get nodes
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl set image deployment/myapp-deployment myapp-container=${{ secrets.DOCKERHUB_USERNAME }}/myapp:ci    
 
       #   uses: docker/setup-qemu-action@v3
 
