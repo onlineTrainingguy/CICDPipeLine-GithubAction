@@ -1,8 +1,8 @@
 name: Docker Build (CI)
 
-on:
+on: push
   
-  pull_request:
+
 
 jobs:
   build:
@@ -21,7 +21,16 @@ jobs:
       - name: Push docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/myapp:ci      
-      # - name: Set up QEMU
+      - name: Load kubeconfig
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        run: |
+          echo "$KUBE_CONFIG_DATA" | base64 --decode > $HOME/.kube/config 
+          chmod 600 $HOME/.kube/config
+      - name: Verify the Cluster Access
+        run: |
+          kubectl get nodes
+
       #   uses: docker/setup-qemu-action@v3
 
       # - name: Set up Docker Buildx
