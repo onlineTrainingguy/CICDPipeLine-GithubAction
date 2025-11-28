@@ -5,7 +5,7 @@ on:
         - main
 jobs:
     hello_world:
-     runs-on: MyAgent
+     runs-on: [ MyAgent, windows, x64 ]
      steps:
         - name: Print Hello World
           run: echo "Hello, World!"
