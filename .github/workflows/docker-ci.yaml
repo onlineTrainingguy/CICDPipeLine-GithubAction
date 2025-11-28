@@ -33,7 +33,7 @@ jobs:
           kubectl get nodes
       - name: Deploy to Kubernetes
         run: |
-               kubectl set image deployment/ngnix nginx=${{ secrets.DOCKERHUB_USERNAME }}/myapp:ci    
+               kubectl set image deployment/nginx-deploy nginx=${{ secrets.DOCKERHUB_USERNAME }}/myapp:ci    
 
       #   uses: docker/setup-qemu-action@v3
 
