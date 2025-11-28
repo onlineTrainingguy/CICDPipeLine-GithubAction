@@ -33,7 +33,8 @@ jobs:
           kubectl get nodes
       - name: Deploy to Kubernetes
         run: |
-          kubectl set image deployment/nginx-deploy nginx=${{ secrets.DOCKERHUB_USERNAME }}/myapp:ci
+          kubectl set image deployment/nginx-deploy nginx=httpd:latest
+        #kubectl set image deployment/nginx-deploy nginx=${{ secrets.DOCKERHUB_USERNAME }}/myapp:ci
           echo "Deployment initiated"
           set +e
           kubectl rollout status deployment/nginx-deploy --timeout=60s
