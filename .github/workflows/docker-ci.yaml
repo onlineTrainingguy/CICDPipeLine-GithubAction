@@ -25,8 +25,8 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         run: |
-          echo "$KUBE_CONFIG_DATA" | base64 --decode > $HOME/.kube/config 
-          chmod 600 $HOME/.kube/config
+          echo "$KUBE_CONFIG_DATA" | sed 's/\\n/\n/g' > ~/.kube/config 
+          chmod 600 ~/.kube/config
       - name: Verify the Cluster Access
         run: |
           kubectl get nodes
