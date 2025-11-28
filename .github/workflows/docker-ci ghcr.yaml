@@ -20,10 +20,10 @@ jobs:
           password: ${{ secrets.GH_TOKEN }}
       - name: Build Docker image
         run: |
-          docker build -t onlinetrainingguy/myapp:ci .
+          docker build -t ghcr.io/onlinetrainingguy/myapp .
       - name: Push Docker image
         run: |
-          docker push ghcr.io/onlinetrainingguy/myapp:ci    
+          docker push ghcr.io/onlinetrainingguy/myapp    
   
   
         # ef8c6465-2b8e-47a1-8fba-6142dddabe4e
