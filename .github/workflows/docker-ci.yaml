@@ -33,10 +33,10 @@ jobs:
           kubectl get nodes
       - name: Deploy to Kubernetes
         run: |
-          kubectl set image deployment/nginx-deploy nginx=${{ secrets.DOCKERHUB_USERNAME }}/myapp:c  --record
+          kubectl set image deployment/nginx-deploy nginx=${{ secrets.DOCKERHUB_USERNAME }}/myapp:ci
           echo "Deployment initiated"
           set +e
-          kubectl rollout status deployment/nginx-deploy --timeout=120s
+          kubectl rollout status deployment/nginx-deploy --timeout=60s
           if [ $? -ne 0 ]; then
             echo "Rollout failed, initiating rollback"
             kubectl rollout undo deployment/nginx-deploy
