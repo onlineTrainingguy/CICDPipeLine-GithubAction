@@ -23,7 +23,7 @@ jobs:
           docker build -t ${{ github.repository_owner }}/myapp:ci .
       - name: Push Docker image
         run: |
-          docker push ${{ github.repository_owner }}/myapp:ci    
+          docker push ghcr.io/${{ github.repository_owner }}/myapp:ci    
   
   
         # ef8c6465-2b8e-47a1-8fba-6142dddabe4e
